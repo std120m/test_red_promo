@@ -18,12 +18,22 @@ class RoleSeeder extends Seeder
         $reader = Role::query()->firstOrCreate(['name' => User::READER_ROLE]);
 
         $librarianPermissions = [
-            Permission::query()->firstOrCreate(['name' => 'edit_reserved_book']),
-            Permission::query()->firstOrCreate(['name' => Permission::IMPORT_BOOKS_PERMISSION])
+            Permission::query()->firstOrCreate(['name' => Permission::IMPORT_BOOKS_PERMISSION]),
+            Permission::query()->firstOrCreate(['name' => Permission::RESERVE_BOOKS_PERMISSION]),
+            Permission::query()->firstOrCreate(['name' => Permission::EDIT_RESERVE_PERMISSION]),
+            Permission::query()->firstOrCreate(['name' => Permission::CHECKOUT_BOOKS_PERMISSION]),            
+        ];
+
+        $userPermissions = [
+            Permission::query()->firstOrCreate(['name' => Permission::RESERVE_BOOKS_PERMISSION]),
         ];
 
         foreach ($librarianPermissions as $permission) {
             $librarian->givePermissionTo($permission);
+        }
+
+        foreach ($userPermissions as $permission) {
+            $reader->givePermissionTo($permission);
         }
     }
 }
