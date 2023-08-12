@@ -15,8 +15,6 @@ class Book extends Model
     use Filterable;
     use PowerJoins;
 
-    public const MAX_RESERVATION_DAYS = 3;
-
     protected $table = 'books';
     protected $fillable = ['title', 'publication_date', 'amount'];
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Permission;
+use App\Models\Reserve;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ReserveRequest extends FormRequest
@@ -25,7 +26,7 @@ class ReserveRequest extends FormRequest
         return [
             'book_id' => 'required|exists:books,id',
             'user_id' => 'required|exists:users,id',
-            'reserved_date' => 'required|date|before_or_equal:+3 days'
+            'reserved_date' => 'required|date|before_or_equal:+' . Reserve::MAX_RESERVATION_DAYS . ' days'
         ];
     }
 }

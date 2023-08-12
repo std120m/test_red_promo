@@ -14,6 +14,8 @@ class Reserve extends Model
     use Filterable;
     use PowerJoins;
 
+    public const MAX_RESERVATION_DAYS = 3;
+
     protected $table = 'reserves';
     protected $fillable = ['book_id', 'reserved_date', 'user_id'];
 

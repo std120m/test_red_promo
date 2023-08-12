@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Exceptions\BookIsAlreadyReserwedException;
 use App\Exceptions\NotEnoughBookException;
-use App\Jobs\ImportBooks;
+use App\Jobs\ImportBooksJob;
 use App\Models\Book;
 use App\Models\BookCheckout;
 use App\Models\BookCheckoutHistory;
@@ -17,7 +17,7 @@ class BookService
     {
         $fileName = time().'_'.$file->getClientOriginalName();
         $filepath = $file->storeAs('uploads', $fileName, 'public');
-        dispatch(new ImportBooks($filepath))->onQueue('import');
+        dispatch(new ImportBooksJob($filepath))->onQueue('import');
     }
 
     public function reserveBook(User $user, Book $book, $reservedDate): Reserve
